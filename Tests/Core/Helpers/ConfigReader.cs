@@ -7,6 +7,7 @@ public static class ConfigReader
     private static readonly IConfiguration _config = new ConfigurationBuilder()
         .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
         .AddJsonFile("Config/appsettings.json", optional: false, reloadOnChange: false)
+        .AddEnvironmentVariables()
         .Build();
 
     public static string BaseUiUrl => _config["BaseUiUrl"]!;
