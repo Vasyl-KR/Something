@@ -1,3 +1,0 @@
-[14:05:04 INF] [UI] START: Tests.UI.Tests.LoginTests.LoginPage_HasCorrectTitle
-[14:05:04 DBG] Browser initialized and maximized
-[14:05:05 INF] [UI] END: LoginPage_HasCorrectTitle — Passed
