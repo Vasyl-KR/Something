@@ -1,3 +1,0 @@
-[13:59:42 INF] [UI] START: Tests.UI.Tests.LoginTests.Login_WithInvalidCredentials_ShowsError
-[13:59:50 DBG] Browser initialized and maximized
-[13:59:56 INF] [UI] END: Login_WithInvalidCredentials_ShowsError — Passed
