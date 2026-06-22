@@ -41,6 +41,10 @@ jobs:
           name: logs
           path: Tests/bin/Debug/net8.0/logs/
 
+      - name: Install Allure CLI
+        if: always()
+        run: npm install -g allure-commandline --save-dev
+
       - name: Load previous Allure history
         if: always()
         uses: actions/checkout@v4
@@ -49,15 +53,17 @@ jobs:
           path: gh-pages
         continue-on-error: true
 
+      - name: Copy Allure history
+        if: always()
+        run: |
+          mkdir -p Tests/allure-results
+          if [ -d "gh-pages/history" ]; then
+            cp -r gh-pages/history Tests/allure-results/history
+          fi
+
       - name: Generate Allure report
         if: always()
-        uses: simple-elf/allure-report-action@v1.7
-        with:
-          allure_results: Tests/allure-results
-          allure_history: allure-history
-          gh_pages: gh-pages
-          allure_report: allure-report
-          keep_reports: 20
+        run: allure generate Tests/allure-results -o allure-report --clean
 
       - name: Publish Allure report to GitHub Pages
         if: always()
@@ -65,4 +71,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: allure-report
