@@ -1,0 +1,4 @@
+[13:59:41 INF] [API] START: Tests.API.Tests.BookstoreApiTests.GetBooks_AllBooksHaveTitles
+[13:59:41 DBG] GET BookStore/v1/Books
+[13:59:41 DBG] GET BookStore/v1/Books → 200
+[13:59:42 INF] [API] END: GetBooks_AllBooksHaveTitles — Passed
