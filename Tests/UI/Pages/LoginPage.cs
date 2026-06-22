@@ -18,7 +18,7 @@ public class LoginPage : BasePage
 
     public void EnterPassword(string password) => WaitForElement(PasswordInput).SendKeys(password);
 
-    public void ClickLogin() => WaitForClickable(LoginButton).Click();
+    public void ClickLogin() => Click(LoginButton);
 
     public void Login(string username, string password)
     {

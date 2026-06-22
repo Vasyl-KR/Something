@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: Tests/bin/Debug/net8.0/allure-results/
+          path: Tests/allure-results/
 
       - name: Upload logs
         if: always()
