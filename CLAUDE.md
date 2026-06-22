@@ -32,6 +32,15 @@ dotnet test --filter "TestCategory=Smoke"
 allure serve Tests
 ```
 
+## CI / GitHub Actions
+
+Workflow: `.github/workflows/tests.yml`
+- Triggers: push/PR to `main` and manual (`workflow_dispatch`)
+- Runs tests headless (`HeadlessBrowser=true` env var)
+- Publishes Allure report to GitHub Pages after each run
+- Allure report URL: https://vasyl-kr.github.io/Something/
+- Logs uploaded as a downloadable artifact on every run
+
 ## Architecture
 
 Single test project (`Tests/Tests.csproj`) with this layout:
@@ -63,7 +72,8 @@ Tests/
 - **UI tests** inherit `UiTestFixture` — driver is available via `Driver` property, no manual setup needed.
 - **API tests** inherit `ApiTestFixture` — `HttpClient` wrapper is available via `Api` property.
 - **Page classes** inherit `BasePage` and receive `IWebDriver` via constructor. Use `WaitForElement(By)` / `WaitForClickable(By)` rather than direct `FindElement` calls.
+- **Clicking elements** — use `Click(By)` from `BasePage` instead of `WaitForClickable(locator).Click()`. It scrolls into view and falls back to JS click if an overlay intercepts, which is required for headless CI.
 - **Logging** — use `Log.Info()`, `Log.Debug()`, `Log.Warning()`, `Log.Error()` anywhere in tests or pages. Both fixtures log test start/end and outcome automatically. `ApiClient` logs every request and response status code.
-- **Config** is read via `ConfigReader` static properties; update `Config/appsettings.json` to point at a different environment.
+- **Config** is read via `ConfigReader` static properties; update `Config/appsettings.json` to change environment. Any value can be overridden via environment variable (e.g. `HeadlessBrowser=true` in CI).
 - **Allure attributes** (`[AllureSuite]`, `[AllureFeature]`, `[AllureTag]`, `[AllureName]`) go on test classes/methods. The `[AllureNUnit]` attribute on fixture base classes wires up the adapter automatically. Allure results are written to `Tests`.
 - **ChromeDriver** is auto-managed by `WebDriverManager` using `MatchingBrowser` strategy — no manual driver binary needed.
