@@ -1,6 +1,0 @@
-[14:15:36 INF] [API] START: Tests.API.Tests.BookstoreApiTests.GetBook_ByIsbn_ReturnsMatchingBook
-[14:15:36 DBG] GET BookStore/v1/Books
-[14:15:37 DBG] GET BookStore/v1/Books → 200
-[14:15:37 DBG] GET BookStore/v1/Book?ISBN=9781449325862
-[14:15:37 DBG] GET BookStore/v1/Book?ISBN=9781449325862 → 200
-[14:15:37 INF] [API] END: GetBook_ByIsbn_ReturnsMatchingBook — Passed
